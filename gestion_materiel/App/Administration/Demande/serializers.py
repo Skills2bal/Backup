@@ -6,5 +6,8 @@ class AddDemandeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Demande
-        fields = ['demande_lien']
+        fields = '__all__'
+
+
+
 
