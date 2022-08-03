@@ -10,8 +10,9 @@ class Crud(APIView):
     def post(self, request):
         serial = EquipementSerializers(data = request.data)
         if serial.is_valid():
-            serial.save()
-            return Response(status=status.HTTP_201_CREATED)
+            equipement = serial.save()
+            serial = GetEquipementSerializers(equipement)
+            return Response(status=status.HTTP_201_CREATED, data= serial.data)
         return Response(status=status.HTTP_400_BAD_REQUEST)
     
     #Modifier

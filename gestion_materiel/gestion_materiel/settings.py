@@ -27,11 +27,13 @@ SECRET_KEY = 'django-insecure-@s0&7^-c_k#w-)4-b1wnm4#u*p-qn1*d89_o=yul8q67j#y#=9
 DEBUG = True
 
 #SERVER_ADRESS = "http://192.168.43.182:8000/"
-SERVER_ADRESS = "http://192.168.43.182:8000/"
+#SERVER_ADRESS = "http://192.168.43.182:8000/"
+SERVER_ADRESS = "http://10.0.180.73:8000/"
 
 ALLOWED_HOSTS = [
     "192.168.43.182",
     "127.0.0.1",
+    "10.0.180.73"
 ]
 
 
@@ -46,8 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'App',
     'rest_framework',
-    'rest_framework.authtoken',
-    'corsheaders'
+    'corsheaders',
+    
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
