@@ -23,8 +23,15 @@ class Crud(APIView):
     # Afficher tout les elements
     def get(self, request):
         depense = Depense.objects.all()
-        serial = GetDepenseSerializers(depense, many = True)
-        return Response(status=status.HTTP_200_OK, data={'depense': serial.data})
+        data = list()
+        for i in depense:
+            data.append(
+                {
+                    'depense': GetDepenseSerializers(i).data,
+                    'bureau': GetBureauxSerializers(i.bureaux_bureaux).data
+                }
+            )
+        return Response(status=status.HTTP_200_OK, data={'depense': data})
     
     # Supprimer 
     def delete(self, request):

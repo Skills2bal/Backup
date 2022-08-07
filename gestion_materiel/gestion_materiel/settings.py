@@ -28,12 +28,12 @@ DEBUG = True
 
 #SERVER_ADRESS = "http://192.168.43.182:8000/"
 #SERVER_ADRESS = "http://192.168.43.182:8000/"
-SERVER_ADRESS = "http://10.0.180.73:8000/"
+SERVER_ADRESS = "http://10.0.170.43:8000/"
 
 ALLOWED_HOSTS = [
     "192.168.43.182",
     "127.0.0.1",
-    "10.0.180.73"
+    "10.0.170.43",
 ]
 
 
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'App',
     'rest_framework',
     'corsheaders',
+    'rest_framework.authtoken'
     
 ]
 

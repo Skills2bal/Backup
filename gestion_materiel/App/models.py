@@ -27,12 +27,17 @@ class Division(models.Model):
     class Meta:
         managed = True
         db_table = 'division'
+
+#Model Categorie par Thierno
+class Categorie(models.Model):
+    categorie_id = models.AutoField(primary_key = True)
+    categorie_libelle = models.CharField(max_length= 100)
         
 # Model Equipement simple par AOB
 class Equipement(models.Model):
     equipement_id = models.IntegerField(db_column='EQUIPEMENT_id', primary_key=True)  # Field name made lowercase.
     equipement_libelle = models.CharField(db_column='EQUIPEMENT_libelle', max_length=45, blank=True, null=True)  # Field name made lowercase.
-    equipement_categorie = models.CharField(db_column='EQUIPEMENT_categorie', max_length=45, blank=True, null=True)  # Field name made lowercase.
+    categorie_categorie = models.ForeignKey('Categorie', on_delete=models.CASCADE)
     equipement_caracteristique = models.TextField(db_column='EQUIPEMENT_caracteristique', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
@@ -59,8 +64,7 @@ class MaterielDote(models.Model):
     materiel_dote_categorie = models.CharField(db_column='MATERIEL_DOTE_categorie', max_length=45, blank=True, null=True)  # Field name made lowercase.
     materiel_dote_caracteristique = models.TextField(db_column='MATERIEL_DOTE_caracteristique', blank=True, null=True)  # Field name made lowercase.
     materiel_dote_dureevie = models.IntegerField(db_column='MATERIEL_DOTE_DureeVie', blank=True, null=True)  # Field name made lowercase.
-    materiel_dote_taux = models.CharField(db_column='MATERIEL_DOTE_Taux', max_length=45, blank=True, null=True)  # Field name made lowercase.
-    materiel_dote_status = models.IntegerField(db_column='MATERIEL_DOTE_status', blank=True, null=True)  # Field name made lowercase.
+    materiel_dote_status = models.IntegerField(db_column='MATERIEL_DOTE_status', blank=True, null=True, default=False)  # Field name made lowercase.
 
     class Meta:
         managed = True

@@ -34,6 +34,7 @@ class Add(APIView):
         data = []
         demande = Demande.objects.all()
         for i in demande:
+            print(i.demande_personel, i.demande_personel_destination)
             expediteur = Personel.objects.get(personel_id = i.demande_personel.id)
             destinataire = Personel.objects.get(personel_id = i.demande_personel_destination.id)
             data.append(

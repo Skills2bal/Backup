@@ -9,8 +9,9 @@ class Crud(APIView):
         serial = MaterielDoteSerializers(data = request.data)
         print(serial.is_valid())
         if serial.is_valid():
-            serial.save()
-            return Response(status=status.HTTP_201_CREATED)
+            materieldote = serial.save()
+            serial = GetMaterielDoteSerializers(materieldote)
+            return Response(status=status.HTTP_201_CREATED, data=serial.data)
         return Response(status=status.HTTP_400_BAD_REQUEST)
     
     #Modifier

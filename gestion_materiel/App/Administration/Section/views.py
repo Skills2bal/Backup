@@ -1,14 +1,11 @@
-#Importation
-#from ast import Add
-#from os import stat
-#import re
+
 from App.models import Division
 from rest_framework.views import APIView
 from rest_framework.response import Response
-#from .serializer import *
+from .serializers import *
 from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
-from App.Administration.Division import serializers
+from App.Administration.Division.serializers import *
 from App.Administration.Section.serializers import *
 from App.models import Section
 
@@ -21,7 +18,7 @@ class Crud(APIView):
             
             section = serial.save()
             serial_s = GetSectionSerializer(section)
-            serial_d = serializers.GetDivisionSerializer(section.division_division)
+            serial_d = GetDivisionSerializer(section.division_division)
             datas = {'division' : serial_d.data,'section': serial_s.data}
             print(datas)
             return Response(status=status.HTTP_201_CREATED,data=datas)
@@ -50,9 +47,17 @@ class Crud(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request):
-        seria = Section.objects.all()
-        seria = GetSectionSerializer(seria , many = True)
-        return Response(status=status.HTTP_200_OK , data = {'sections' : seria.data})
+        section = Section.objects.all()
+        data = list()
+        for i in section:
+            data.append(
+                {
+                    'division': GetDivisionSerializer(i.division_division).data,
+                    'section' : GetSectionSerializer(i).data
+                }
+            )
+        
+        return Response(status=status.HTTP_200_OK , data = {'sections' : data})
 
 class GetInstance(APIView):
     def get(self, request):
